@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+# Ian Taylor 2017
+
+# Load all necessary files containing exercises
+# Use rlwrap to make the REPL actually useable ><
+
+cd src
+rlwrap scheme --load \
+helpers.scm \
+11_welcome_back.scm \
+12_take_cover.scm \
