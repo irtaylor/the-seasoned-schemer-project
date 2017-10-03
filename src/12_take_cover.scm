@@ -116,13 +116,13 @@
   (lambda (set1 set2)
     (letrec
       ((U
-          (lambda (set)
-            (cond
-              ((null? set) set2)
-              ((member? (car set) set2)
-                  (U (cdr set)))
-            (else (cons (car set)
-                          (U (cdr set))))))))
+        (lambda (set)
+          (cond
+            ((null? set) set2)
+            ((member? (car set) set2)
+                (U (cdr set)))
+          (else (cons (car set)
+                        (U (cdr set))))))))
       (U set1))))
 
 ; Remember: the function U knows about set1 b/c it was defined using letrec.
@@ -135,4 +135,49 @@
 ;   (lambda (lat a)...))
 
 ; then union would get confused! We should find a way to get rid of
-; union's dependence on the order of arguments in member? 
+; union's dependence on the order of arguments in member?
+
+(define union-letrec-2
+  (lambda (set1 set2)
+    (letrec
+      ((U
+        (lambda (set)
+          (cond
+            ((null? set) set2)
+            ((M? (car set) set2)
+                (U (cdr set)))
+          (else (cons (car set)
+                        (U (cdr set)))))))
+       (M?
+         (lambda (a lat)
+          (cond
+            ((null? lat) #f)
+            ((eq? a (car lat)) #t)
+          (else (M? a (cdr lat)))))))
+      (U set1))))
+
+; this is also a better option, but now the definition of M?
+; ignores the 12th Commandment.
+
+(define union-letrec-3
+  (lambda (set1 set2)
+    (letrec
+      ((U
+        (lambda (set)
+          (cond
+            ((null? set) set2)
+            ((M? (car set) set2)
+                (U (cdr set)))
+          (else (cons (car set)
+                        (U (cdr set)))))))
+       (M?
+         (lambda (a lat)
+            (letrec
+              ((N?
+                (lambda (lat)
+                  (cond
+                    ((null? lat) #f)
+                    ((eq? (car lat) a) #t)
+                  (else (N? (cdr lat)))))))
+              (N? lat)))))
+      (U set1))))

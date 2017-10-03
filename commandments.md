@@ -7,4 +7,9 @@ Use additional arguments when a function needs to know what other arguments to t
 
 ## The Twelfth Commandment
 
-Use `(letrec ...)` to remove arguments that do not change for recursive applications. 
+Use `(letrec ...)` to remove arguments that do not change for recursive applications.
+
+
+## The Thirteenth Commandment
+
+Use `(letrec ...)` to hide and to protect functions. 
