@@ -108,6 +108,31 @@
     (cond
       ((null? set1) set2)
       ((member? (car set1) set2)
-          union (cdr set1) set2))
+          (union (cdr set1) set2))
     (else (cons (car set1)
-                (union (cdr set1) set2)))))
+                (union (cdr set1) set2))))))
+
+(define union-letrec
+  (lambda (set1 set2)
+    (letrec
+      ((U
+          (lambda (set)
+            (cond
+              ((null? set) set2)
+              ((member? (car set) set2)
+                  (U (cdr set)))
+            (else (cons (car set)
+                          (U (cdr set))))))))
+      (U set1))))
+
+; Remember: the function U knows about set1 b/c it was defined using letrec.
+; U thus knows about everything that union knows about.
+
+; U also knows about the function member?,  but the order of arguments
+; to member? matters. if we said instead:
+
+; (define member?
+;   (lambda (lat a)...))
+
+; then union would get confused! We should find a way to get rid of
+; union's dependence on the order of arguments in member? 
