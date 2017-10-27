@@ -181,3 +181,54 @@
                   (else (N? (cdr lat)))))))
               (N? lat)))))
       (U set1))))
+
+
+; remember that two-in-a-row? uses helper functions, which could be protected
+(define two-in-a-row?
+  (lambda (lat)
+    (letrec
+      ((W (lambda (a lat)
+            (cond
+              ((null? lat) #f)
+            (else (or (eq? (car lat) a)
+                      (W (car lat) (cdr lat))))))))
+      (cond
+        ((null? lat) #f)
+      (else (W (car lat) (cdr lat)))))))
+
+; remember that two-in-a-row? uses helper functions, which could be protected
+(define two-in-a-row-b?
+    (letrec
+      ((W (lambda (a lat)
+            (cond
+              ((null? lat) #f)
+            (else (or (eq? (car lat) a)
+                      (W (car lat) (cdr lat))))))))
+    (lambda (lat)
+      (cond
+        ((null? lat) #f)
+      (else (W (car lat) (cdr lat)))))))
+
+(define sum-of-prefixes
+  (lambda (tup)
+    (letrec
+      ((S (lambda (sss tup)
+            (cond
+              ((null? tup) (quote ()))
+            (else
+              (cons (+ sss (car tup))
+                    (S (+ sss (car tup))
+                       (cdr tup))))))))
+      (S 0 tup))))
+
+(define scramble
+  (lambda (tup)
+    (letrec
+      ((P (lambda (tup rp)
+            (cond
+              ((null? tup) (quote ()))
+            (else (cons (pick (car tup)
+                          (cons (car tup) rp))
+                        (P (cdr tup)
+                           (cons (car tup) rp))))))))
+      (P tup (quote ())))))
