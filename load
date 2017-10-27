@@ -9,3 +9,4 @@ rlwrap scheme --load \
 helpers.scm \
 11_welcome_back.scm \
 12_take_cover.scm \
+13_hop_skip_jump.scm \
