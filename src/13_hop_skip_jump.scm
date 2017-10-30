@@ -83,7 +83,7 @@
       (letrec
         ((A (lambda (lset)
               (cond
-                ((null? (car lset))
+                ((null? (car lset))   ; letcc gives us the ability to immediately return '() if we encounter '() in lset
                   (hop (quote ())))
                 ((null? (cdr lset))
                   (car lset))

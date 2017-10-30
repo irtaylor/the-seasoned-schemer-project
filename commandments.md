@@ -12,4 +12,9 @@ Use `(letrec ...)` to remove arguments that do not change for recursive applicat
 
 ## The Thirteenth Commandment
 
-Use `(letrec ...)` to hide and to protect functions. 
+Use `(letrec ...)` to hide and to protect functions.
+
+
+## The Fourteenth Commandment
+
+Use `(letcc ...)` to return values abruptly and promptly. 
