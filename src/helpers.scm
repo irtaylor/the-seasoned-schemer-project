@@ -36,3 +36,14 @@
     (cond
       ((null? lat) (quote ()))
       (else (cons (reversify (cdr lat)) (car lat))))))
+
+(define-syntax letcc
+ (syntax-rules ()
+   ((letcc var body ...)
+    (call-with-current-continuation
+      (lambda (var)  body ... )))))
+(define-syntax try
+ (syntax-rules ()
+   ((try var a . b)
+    (letcc success
+      (letcc var (success a)) . b))))
