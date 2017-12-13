@@ -93,3 +93,51 @@
       (cond
         ((null? lset) (quote ()))
       (else (A lset)))))))
+
+
+
+; not quite finished -- intersectall that returns abruptly and promptly
+(define intersectall-ap
+  (lambda (lset)
+    (letcc hop
+        (letrec
+          ((A (lambda (lset)
+                (cond
+                  ((null? (car lset))
+                    (hop (quote ())))
+                  ((null? (cdr lset))
+                    (car lset))
+                (else (I (car lset)
+                         (A (cdr lset)))))))
+           (I ...))
+          (cond
+            ((null? lset) (quote ()))
+          (else (A lset)))))))
+
+
+; NOTE: one reason to do this is b/c the value of a never changes.
+; see 12th commandment
+(define rember-letrec
+  (lambda (a lat)
+    (letrec
+      ((R (lambda (lat)
+            (cond
+              ((null? lat) (quote ()))
+              ((eq? (car lat) a) (cdr lat))
+            (else (cons (car lat)
+                        (R (cdr lat))))))))
+      (R lat))))
+
+; rember-beyond-first removes the first occurence of a and everything that comes after it
+(define rember-beyond-first
+  (lambda (a lat)
+    (letrec
+      ((R (lambda (lat)
+            (cond
+              ((null? lat) (quote ()))
+              ((eq? (car lat) a) (quote ()))
+            (else (cons (car lat)
+                        (R (cdr lat))))))))
+      (R lat))))
+
+; ... p 54
