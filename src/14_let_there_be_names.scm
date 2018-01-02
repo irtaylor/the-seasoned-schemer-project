@@ -25,3 +25,18 @@
 ; (leftmost-2 '(((a) b) (c d)))
 ; (leftmost-2 '(((() a) ())))
 ; (leftmost-2 '(((()) ()))) => '()
+
+(define leftmost-let
+  (lambda (l)
+    (cond
+      ((null? l) (quote ()))
+      ((atom? (car l)) (car l))
+    (else
+      (let ((a (leftmost-let (car l))))
+        (cond
+          ((atom? a ) a)
+        (else (leftmost-let (cdr l)))))))))
+
+; (leftmost-let '(((a) b) (c d)))
+; (leftmost-let '(((() a) ())))
+; (leftmost-let '(((()) ()))) => '()
