@@ -128,16 +128,32 @@
                         (R (cdr lat))))))))
       (R lat))))
 
-; rember-beyond-first removes the first occurence of a and everything that comes after it
+; rember-beyond-first removes the first occurence of a and everything that comes after it.
+; it differs from rember in only one answer
 (define rember-beyond-first
   (lambda (a lat)
     (letrec
       ((R (lambda (lat)
             (cond
               ((null? lat) (quote ()))
-              ((eq? (car lat) a) (quote ()))
+              ((eq? (car lat) a) (quote ()))    ; this is the different answer
             (else (cons (car lat)
                         (R (cdr lat))))))))
       (R lat))))
 
-; ... p 54
+; remove everything up to the last occurence of 'a
+(define rember-upto-last
+  (lambda (a lat)
+    (letcc skip
+      (letrec
+      ((R (lambda (lat)
+            (cond
+              ((null? lat) (quote ()))
+              ((eq? (car lat) a)
+               (skip (R (cdr lat))))        ; this is what drops everything up to the last 'a
+            (else (cons (car lat)
+                        (R (cdr lat))))))))
+      (R lat)))))
+
+; (define lat '(cookies chocolate mints caramelt delight ginger snaps cookies gingerbread mint chocolate chip))
+; (rember-upto-last 'cookies lat)  => '(gingerbread mint chocolate chip)
