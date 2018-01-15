@@ -17,4 +17,9 @@ Use `(letrec ...)` to hide and to protect functions.
 
 ## The Fourteenth Commandment
 
-Use `(letcc ...)` to return values abruptly and promptly. 
+Use `(letcc ...)` to return values abruptly and promptly.
+
+
+## The Fifteenth Commandment v.1
+
+Use `(let ...)` to name the values of repeated expressions. 
