@@ -99,3 +99,5 @@
                     (else
                       (cons av (cdr l))))))))))  ; otherwise remove 'a'
       (R l))))
+
+; TODO: Complete this chapter later...
