@@ -22,4 +22,12 @@ Use `(letcc ...)` to return values abruptly and promptly.
 
 ## The Fifteenth Commandment v.1
 
-Use `(let ...)` to name the values of repeated expressions. 
+Use `(let ...)` to name the values of repeated expressions.
+
+
+## TODO: Finish ch 14
+
+
+## The Sixteenth Commandment
+
+Use `(set! ...)` only with names define in `(let ...)`s 
