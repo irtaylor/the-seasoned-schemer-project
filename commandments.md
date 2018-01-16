@@ -30,4 +30,4 @@ Use `(let ...)` to name the values of repeated expressions.
 
 ## The Sixteenth Commandment
 
-Use `(set! ...)` only with names define in `(let ...)`s 
+Use `(set! ...)` only with names define in `(let ...)`s.
