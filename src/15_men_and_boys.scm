@@ -64,3 +64,44 @@ x ; => 'onion
       (set! x food)
       (cons food
         (cons x '())))))
+
+; this is almost the same as having two definitions:
+(define x_1 'minestrone)
+(define omnivore-no-let
+  (lambda (food)
+    (set! x_1 food)
+    (cons food
+      (cons x_1 '()))))
+
+; ^ treat the x_1 thing as an imaginary name
+; TODO(ian): is this the same as environments??
+
+(define gobbler
+  (let ((x 'minestrone))
+    (lambda (food)
+      (set! x food)
+      (cons food
+        (cons x '())))))
+
+; same as:
+(define x_2 'minestrone)
+(define gobbler-no-let
+  (lambda (food)
+    (set! x_2 food)
+    (cons food
+      (cons x_2 '()))))
+
+; NOTE: missing pages 100-101
+
+; breaking the 17th Commandment for clarity:
+(define food 'none)
+(define glutton
+  (lambda (x)
+    (set! food x)
+    (cons (quote more)
+      (cons x
+        (cons (quote more)
+          (cons x '()))))))
+
+(glutton 'garlic) ; => '(more garlic more garlic)
+food  ; => 'garlic
