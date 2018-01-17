@@ -31,3 +31,8 @@ Use `(let ...)` to name the values of repeated expressions.
 ## The Sixteenth Commandment
 
 Use `(set! ...)` only with names define in `(let ...)`s.
+
+
+## The Seventeenth Commandment v.1
+
+Use `(set! ...)` for `(let ((x ...)) ...)` only if there is at least one `(lambda ...)` between it and the `(let ((x ...)) ...)`.
