@@ -105,3 +105,24 @@ x ; => 'onion
 
 (glutton 'garlic) ; => '(more garlic more garlic)
 food  ; => 'garlic
+x     ; => 'onion
+
+; ^ in case you forgot, gourmand set! x to 'onion (see above)
+
+; if we wanted to swap the values of x and food, would this work?
+(define chez-nous-bad
+  (lambda ()
+    (set! food x)
+    (set! x food)))
+
+; This will fail. We need a temp value for the swap.
+
+(define chez-nous
+  (lambda ()
+    (let ((a food))
+      (set! food x)
+      (set! x a))))
+
+(chez-nous)
+food  ; => 'onion
+x     ; => 'garlic
