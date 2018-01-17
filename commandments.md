@@ -36,3 +36,8 @@ Use `(set! ...)` only with names define in `(let ...)`s.
 ## The Seventeenth Commandment v.1
 
 Use `(set! ...)` for `(let ((x ...)) ...)` only if there is at least one `(lambda ...)` between it and the `(let ((x ...)) ...)`.
+
+
+## The Eighteenth Commandment
+
+Use `(set! x ...)` only when the value that `x` refers to is no longer needed.
